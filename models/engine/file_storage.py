@@ -60,4 +60,4 @@ class FileStorage:
                     class_name, obj_id = key.split('.')
                     obj = eval(class_name)()
                     obj.__dict__ = serialized_obj
-                    FileStorage.__objects[key] = obj
+                FileStorage.__objects[key] = obj
