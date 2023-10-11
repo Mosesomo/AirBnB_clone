@@ -14,17 +14,20 @@ class BaseModel:
             *args (any): Unused.
             **kwargs (dict): Key/value pairs of attributes.
         """
+        from models import storage
 
         if kwargs:
             for key, value in kwargs.items():
                 if key == 'created_at' or key == 'updated_at':
-                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(self, key, datetime.strptime
+                            (value, "%Y-%m-%dT%H:%M:%S.%f"))
                 elif key != '__class__':
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.updated_at = self.created_at
+            storage.new(self)
 
     def __str__(self):
         """prints the string representation"""
@@ -33,9 +36,10 @@ class BaseModel:
                 format(self.__class__.__name__, self.id, self.__dict__))
 
     def save(self):
-        """updates the public instance attribute updated_at with the current datetime
+        """updates the public instance attribute
+            updated_at with the current datetime
         """
-        from models.engine.file_storage import storage
+        from models import storage
 
         self.updated_at = datetime.now()
         storage.save()
@@ -47,13 +51,9 @@ class BaseModel:
 
         dict_obj = self.__dict__.copy()
         dict_obj["__class__"] = self.__class__.__name__
-        dict_obj["created_at"] = dict_obj["created_at"].isoformat()
-        dict_obj["updated_at"] = dict_obj["updated_at"].isoformat()
+        if isinstance(dict_obj["created_at"], datetime):
+            dict_obj["created_at"] = dict_obj["created_at"].isoformat()
+        if isinstance(dict_obj["updated_at"], datetime):
+            dict_obj["updated_at"] = dict_obj["updated_at"].isoformat()
 
         return dict_obj
-
-    def new(self):
-        """Adds the instance to the storage"""
-        from models.engine.file_storage import storage
-
-        storage.new(self)
