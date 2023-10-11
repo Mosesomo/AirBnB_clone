@@ -35,8 +35,10 @@ class BaseModel:
     def save(self):
         """updates the public instance attribute updated_at with the current datetime
         """
+        from models.engine.file_storage import storage
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns a dictionary containing all keys/values of
@@ -49,3 +51,9 @@ class BaseModel:
         dict_obj["updated_at"] = dict_obj["updated_at"].isoformat()
 
         return dict_obj
+
+    def new(self):
+        """Adds the instance to the storage"""
+        from models.engine.file_storage import storage
+
+        storage.new(self)
