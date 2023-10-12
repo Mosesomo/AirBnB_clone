@@ -4,9 +4,8 @@ Defining a file storage class
 """
 import json
 import os
-from models.base_model import BaseModel
+
 """
-from models.user import User
 from models.state import State
 from models.city import City
 from models.place import Place
@@ -49,15 +48,26 @@ class FileStorage:
                 serialized_objects[key] = obj.to_dict()
             json.dump(serialized_objects, file)
 
+    def classes(self):
+        """Returns a dictionary of classes"""
+
+        from models.base_model import BaseModel
+        from models.user import User
+
+        return {
+                "BaseModel": BaseModel,
+                "User": User
+                }
+
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        if os.path.exists(FileStorage.__filepath):
-            with open(FileStorage.__filepath, 'r') as file:
-                serialized_objects = json.load(file)
-                for key, serialized_obj in serialized_objects.items():
-                    class_name, obj_id = key.split('.')
-                    obj = eval(class_name)()
-                    obj.__dict__ = serialized_obj
-                FileStorage.__objects[key] = obj
+        if not os.path.isfile(FileStorage.__filepath):
+            return
+        with open(FileStorage.__filepath, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            classes = self.classes()
+            obj_dict = {key: classes[value["__class__"]](**value)
+                        for key, value in obj_dict.items()}
+            FileStorage.__objects = obj_dict
