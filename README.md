@@ -24,4 +24,4 @@ Clone the repository to your local machine,
 Navigate to the directory, (where the console.py is)
 You can use the command ./console.py in your terminal.
 
-![Console](https://www.canva.com/design/DAFxIf45QqQ/view)
+![Console](https://github.com/Mosesomo/AirBnB_clone/blob/0e567bca40a4b5539d4fee25ebdd180a74bccdcd/image/Console.png)
