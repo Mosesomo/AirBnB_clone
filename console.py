@@ -102,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         uid = args[1]
-        key = f"{classname}.{uid}"
+        key = "{}.{}".format(classname, uid)
 
         if key not in storage.all():
             print("** no instance found **")
