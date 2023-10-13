@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+"""
+unittest for models/city.py
+Test case:
+    Test_state
+    Test_name
+"""
 import unittest
 from models.city import City
 

@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+Defines unittests for models/user.py.
+"""
 import unittest
 from models.user import User
 

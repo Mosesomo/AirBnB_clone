@@ -1,3 +1,14 @@
+#!/usr/bin/python3
+"""
+Defines unittests for models/base_model.py.
+
+Unittest classes:
+    TestBaseModel_setUp
+    TestBaseModel_test_init
+    TestBaseModel_test_str
+    TestBaseModel_save
+    TestBaseModel_to_dict
+"""
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
