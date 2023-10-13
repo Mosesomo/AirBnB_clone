@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defining a module"""
 import cmd
+import sys
 from models import storage
 from models.base_model import BaseModel
 
@@ -62,10 +63,9 @@ class HBNBCommand(cmd.Cmd):
                     del storage.all()[key]
                     storage.save()
 
-
     def do_all(self, arg):
         """Show all objects or objects of a specific class."""
-        
+
         if arg != "":
             args = arg.split(" ")
             class_name = args[0]
@@ -80,31 +80,69 @@ class HBNBCommand(cmd.Cmd):
         else:
             inst_list = []
             for k, v in storage.all().items():
-                 v = str(v)
-                 inst_list.append(v)
+                v = str(v)
+                inst_list.append(v)
             print(inst_list)
 
     def do_update(self, arg):
         """Update an object with new attributes."""
-        args = arg.split(" ")
+        args = arg.split()
+
         if not args:
             print("** class name missing **")
-        elif args[0] not in storage.classes():
+            return
+
+        classname = args[0]
+        if classname not in storage.classes():
             print("** class doesn't exist **")
-        elif len(args) < 2:
+            return
+
+        if len(args) < 2:
             print("** instance id missing **")
-        elif len(args) < 3:
+            return
+
+        uid = args[1]
+        key = f"{classname}.{uid}"
+
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+
+        if len(args) < 3:
             print("** attribute name missing **")
-        elif len(args) < 4:
+            return
+
+        attribute = args[2]
+
+        if len(args) < 4:
             print("** value missing **")
+            return
+
+        value = args[3]
+        cast = None
+        if '.' in value:
+            cast = float
         else:
-            key = args[0] + "." + args[1]
-            if key in storage.all():
-                obj = storage.all()[key]
-                setattr(obj, args[2], args[3])
-                obj.save()
-            else:
-                print("** no instance found **")
+            cast = int
+
+        if value.startswith('"') and value.endswith('"'):
+            value = value[1:-1]
+
+        attributes = storage.attributes()[classname]
+
+        if attribute in attributes:
+            if attribute not in ["id", "created_at", "update_at"]:
+                value = attributes[attribute](value)
+                setattr(storage.all()[key], attribute, value)
+                storage.all()[key].save()
+        elif cast:
+            try:
+                value = cast(value)
+            except ValueError:
+                pass
+
+        setattr(storage.all()[key], attribute, value)
+        storage.all()[key].save()
 
     def do_quit(self, arg):
         """Exit the console."""

@@ -4,6 +4,7 @@ Defining a file storage class
 """
 import json
 import os
+import datetime
 
 
 class FileStorage:
@@ -59,6 +60,43 @@ class FileStorage:
                 "Amenity": Amenity,
                 "Place": Place,
                 "Review": Review
+                }
+
+    def attributes(self):
+        """Returns the valid attributes and their types"""
+
+        return {"BaseModel":
+                {"id": str,
+                    "created_at": datetime.datetime,
+                    "updated_at": datetime.datetime},
+                "User":
+                {"email": str,
+                    "password": str,
+                    "first_name": str,
+                    "last_name": str},
+                "State":
+                {"name": str},
+                "City":
+                {"state_id": str,
+                    "name": str},
+                "Amenity":
+                {"name": str},
+                "Place":
+                {"city_id": str,
+                    "user_id": str,
+                    "name": str,
+                    "description": str,
+                    "number_rooms": int,
+                    "number_bathrooms": int,
+                    "max_guest": int,
+                    "price_by_night": int,
+                    "latitude": float,
+                    "longitude": float,
+                    "amenity_ids": list},
+                "Review":
+                {"place_id": str,
+                    "user_id": str,
+                    "text": str}
                 }
 
     def reload(self):
