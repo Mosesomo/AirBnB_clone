@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Defining a module"""
 import cmd
-import sys
 from models import storage
 from models.base_model import BaseModel
 
@@ -74,8 +73,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 inst_list = []
                 for k, v in storage.all().items():
-                    v = str(v)
-                    inst_list.append(v)
+                    inst_list.append(str(v))
                 print(inst_list)
         else:
             inst_list = []
@@ -143,6 +141,22 @@ class HBNBCommand(cmd.Cmd):
 
         setattr(storage.all()[key], attribute, value)
         storage.all()[key].save()
+
+    def do_count(self, arg):
+        """to retrieve the number of instances of a
+            class: <class name>.count().
+        """
+        args = arg.split(" ")
+        if not args[0]:
+            print("** class name missing **")
+        elif args[0] not in storage.classes():
+            print("** class doesn't exist **")
+        else:
+            matches = []
+            for k in storage.all():
+                if k.startswith(args[0] + '.'):
+                    matches.append(k)
+            print(len(matches))
 
     def do_quit(self, arg):
         """Exit the console."""
