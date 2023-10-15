@@ -14,7 +14,7 @@ class FileStorage:
         __objects (dict): A dictionary of instantiated objects.
     """
 
-    __filepath = "file.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -35,7 +35,7 @@ class FileStorage:
         serializes __objects to the JSON file (path: __file_path)
         """
 
-        with open(FileStorage.__filepath, 'w', encoding="utf-8") as file:
+        with open(FileStorage.__file_path, 'w', encoding="utf-8") as file:
             serialized_objects = {}
             for key, obj in FileStorage.__objects.items():
                 serialized_objects[key] = obj.to_dict()
@@ -103,9 +103,9 @@ class FileStorage:
         """
         deserializes the JSON file to __objects
         """
-        if not os.path.isfile(FileStorage.__filepath):
+        if not os.path.isfile(FileStorage.__file_path):
             return
-        with open(FileStorage.__filepath, "r", encoding="utf-8") as f:
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
             obj_dict = json.load(f)
             classes = self.classes()
             obj_dict = {key: classes[value["__class__"]](**value)
