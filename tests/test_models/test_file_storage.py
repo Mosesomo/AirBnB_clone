@@ -20,6 +20,7 @@ from models.engine.file_storage import FileStorage
 
 
 class TestFileStorage(unittest.TestCase):
+    """class representing test for file storage engine"""
 
     def setUp(self):
         self.file_path = "file.json"
