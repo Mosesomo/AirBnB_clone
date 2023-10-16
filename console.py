@@ -39,11 +39,11 @@ class HBNBCommand(cmd.Cmd):
         """Show the details of an object."""
         args = arg.split(" ")
         if not args:
-            print("** class name missing **")
+            print("** class doesn't exist **")
         else:
             class_name = args[0]
             if class_name not in storage.classes():
-                print("** class doesn't exist **")
+                print("** class name missing **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
@@ -59,11 +59,11 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(" ")
         if not args:
-            print("** class name missing **")
+            print("** class doesn't exist **")
         else:
             class_name = args[0]
             if class_name not in storage.classes():
-                print("** class doesn't exist **")
+                print("** class name missing **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
