@@ -48,7 +48,7 @@ class TestFileStorage(unittest.TestCase):
     def test_all(self):
         all_objects = self.storage.all()
         self.assertIsInstance(all_objects, dict)
-        expected_length = len(all_objects)  # Calculate length dynamically
+        expected_length = len(all_objects)
         self.assertEqual(len(all_objects), expected_length)
 
     def test_new(self):
