@@ -10,6 +10,19 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def do_EOF(self, arg):
+        """Exit the console."""
+        return True
+
+    def do_quit(self, arg):
+        """Exit the console."""
+        return True
+
+    def emptyline(self):
+        """Handles an empty line to excute nothing"""
+
+        pass
+
     def do_create(self, arg):
         """Create a new object."""
         if not arg:
@@ -157,14 +170,6 @@ class HBNBCommand(cmd.Cmd):
                 if k.startswith(args[0] + '.'):
                     matches.append(k)
             print(len(matches))
-
-    def do_quit(self, arg):
-        """Exit the console."""
-        return True
-
-    def do_EOF(self, arg):
-        """Exit the console."""
-        return True
 
 
 if __name__ == "__main__":
