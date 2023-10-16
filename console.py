@@ -37,13 +37,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Show the details of an object."""
-        args = arg.split(" ")
-        if not args:
-            print("** class doesn't exist **")
+
+        if arg == "" or arg is None:
+            print("** class name missing **")
         else:
+            args = arg.split(" ")
             class_name = args[0]
             if class_name not in storage.classes():
-                print("** class name missing **")
+                print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
@@ -57,13 +58,13 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """Destroy an object."""
 
-        args = arg.split(" ")
-        if not args:
-            print("** class doesn't exist **")
+        if arg == "" or arg is None:
+            print("** class name missing **")
         else:
+            args = arg.split(" ")
             class_name = args[0]
             if class_name not in storage.classes():
-                print("** class name missing **")
+                print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
