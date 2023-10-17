@@ -1,6 +1,6 @@
 #AirBnB Clone
 
-![Console](https://github.com/Mosesomo/AirBnB_clone/blob/0e567bca40a4b5539d4fee25ebdd180a74bccdcd/https://miro.medium.com/v2/resize:fit:1358/0*NChTo-XqLOxLabIW)
+![pexels-matheus-bertelli-13870631](https://github.com/Mosesomo/AirBnB_clone/assets/107793010/f906b715-ba86-476b-bc97-5d0540573177)
 
 
 AirBnB Clone is a project that aims to build a website similar to AirBnB. It is a complete web application that includes a database for storing data, a back-end API for handling requests, and a front-end interface for user interaction.
