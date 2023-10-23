@@ -1,6 +1,9 @@
 AirBnB clone - Web static
 
 ------------------------------------------------------------
+![hbnb pnp](https://github.com/Mosesomo/AirBnB_clone/assets/107793010/27e3e5e6-62a1-4f27-a594-aba763e64add)
+
+
 Now that you have a command interpreter for managing your AirBnB objects, it’s time to make them alive!
 
 Before developing a big and complex web application, we will build the front end step-by-step.
