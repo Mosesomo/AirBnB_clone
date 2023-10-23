@@ -1,0 +1,10 @@
+@media only screen and (max-width: 980px){
+    section.filters{
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    secttion.filters button{
+        height: 40px;
+        width: 10%;
+    }
+}
